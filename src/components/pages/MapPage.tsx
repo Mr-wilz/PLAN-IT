@@ -123,7 +123,7 @@ export default function MapPage({ showBreadcrumb = true }: MapPageProps) {
 
     try {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=${encodeURIComponent(cleanedQuery)}`,
+        `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=1&namedetails=1&accept-language=en&q=${encodeURIComponent(cleanedQuery)}`,
       );
 
       if (!response.ok) {
@@ -134,6 +134,8 @@ export default function MapPage({ showBreadcrumb = true }: MapPageProps) {
         display_name: string;
         lat: string;
         lon: string;
+        name?: string;
+        namedetails?: Record<string, string>;
       }>;
 
       if (!data.length) {
@@ -141,8 +143,13 @@ export default function MapPage({ showBreadcrumb = true }: MapPageProps) {
       }
 
       const result = data[0];
+      const englishName =
+        result.namedetails?.name ||
+        result.name ||
+        result.display_name.split(",")[0] ||
+        cleanedQuery;
       const newLocation: Location = {
-        name: result.display_name.split(",")[0] || cleanedQuery,
+        name: englishName,
         lat: Number(result.lat),
         lng: Number(result.lon),
         description: result.display_name,

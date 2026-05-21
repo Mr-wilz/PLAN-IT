@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { AnimatePresence, motion, useDragControls } from "framer-motion";
 import { Bot, MessageCircleQuestion, Send, Sparkles, X } from "lucide-react";
 import { useTheme } from "@/components/context/ThemeContext";
 
@@ -44,6 +44,8 @@ const defaultAnswer =
 
 export default function CustomerServiceAiWidget() {
   const [open, setOpen] = useState(false);
+  const dragControls = useDragControls();
+  const didDragRef = useRef(false);
   const { theme } = useTheme();
   const isDark = theme === "dark";
   const [input, setInput] = useState("");
@@ -84,7 +86,22 @@ export default function CustomerServiceAiWidget() {
   };
 
   return (
-    <div className="fixed bottom-3 right-3 z-70 sm:bottom-5 sm:right-5">
+    <motion.div
+      className="fixed bottom-3 right-3 z-70 sm:bottom-5 sm:right-5"
+      drag
+      dragListener={false}
+      dragControls={dragControls}
+      dragMomentum={false}
+      dragElastic={0.12}
+      onDragStart={() => {
+        didDragRef.current = true;
+      }}
+      onDragEnd={() => {
+        window.setTimeout(() => {
+          didDragRef.current = false;
+        }, 0);
+      }}
+    >
       <AnimatePresence>
         {open && (
           <motion.div
@@ -181,7 +198,13 @@ export default function CustomerServiceAiWidget() {
 
       <button
         type="button"
-        onClick={() => setOpen((previous) => !previous)}
+        onPointerDown={(event) => {
+          dragControls.start(event);
+        }}
+        onClick={() => {
+          if (didDragRef.current) return;
+          setOpen((previous) => !previous);
+        }}
         className={`group inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-left shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition sm:gap-3 sm:px-4 sm:py-3 ${isDark ? "border border-amber-200/20 bg-[#120d08]/95 text-white hover:border-amber-200/40 hover:bg-[#17110c]" : "border border-gray-200 bg-white text-gray-800 hover:border-gray-300 hover:bg-gray-50"}`}
         aria-label="Open customer service assistant"
       >
@@ -204,6 +227,6 @@ export default function CustomerServiceAiWidget() {
           className={`hidden sm:block ${isDark ? "text-amber-200/90" : "text-primary-500/90"}`}
         />
       </button>
-    </div>
+    </motion.div>
   );
 }
