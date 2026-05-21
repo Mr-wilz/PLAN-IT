@@ -214,18 +214,8 @@ export default function CustomerServiceAiWidget() {
           <Bot size={16} className="sm:hidden" />
           <Bot size={18} className="hidden sm:block" />
         </span>
-        <span>
-          <span className="block text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-amber-500 sm:text-[0.68rem] sm:tracking-[0.28em]">
-            Help
-          </span>
-          <span className="hidden text-xs text-gray-500 sm:block">
-            Ask a quick question
-          </span>
-        </span>
-        <Sparkles
-          size={16}
-          className={`hidden sm:block ${isDark ? "text-amber-200/90" : "text-primary-500/90"}`}
-        />
+       
+       
       </button>
     </motion.div>
   );
