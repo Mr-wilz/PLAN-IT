@@ -39,13 +39,13 @@ const toKnowCards = [
 
 export default function ToKnow() {
   return (
-    <section id="toKnow" className="bg-white px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section id="toKnow" className="w-full bg-white py-14 sm:py-16">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-amber-700">
             How it works
           </p>
-          <h2 className="mt-3 text-3xl font-semibold text-slate-950 sm:text-4xl">
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950 sm:text-3xl lg:text-4xl">
             Everything you need for planning your trip
           </h2>
           <p className="mt-4 text-sm leading-6 text-slate-600 sm:text-base">

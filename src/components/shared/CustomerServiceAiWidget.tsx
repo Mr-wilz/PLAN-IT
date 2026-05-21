@@ -84,7 +84,7 @@ export default function CustomerServiceAiWidget() {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-70">
+    <div className="fixed bottom-3 right-3 z-70 sm:bottom-5 sm:right-5">
       <AnimatePresence>
         {open && (
           <motion.div
@@ -92,14 +92,14 @@ export default function CustomerServiceAiWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.98 }}
             transition={{ duration: 0.18 }}
-            className={`mb-3 w-[min(92vw,24rem)] overflow-hidden rounded-[28px] border ${isDark ? "border-amber-200/20 bg-[#0d0906]/95 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]" : "border-gray-200/40 bg-white text-gray-800 shadow-[0_12px_30px_rgba(0,0,0,0.06)]"} backdrop-blur-2xl`}
+            className={`mb-3 w-[min(84vw,19rem)] overflow-hidden rounded-3xl border sm:w-[min(92vw,24rem)] ${isDark ? "border-amber-200/20 bg-[#0d0906]/95 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]" : "border-gray-200/40 bg-white text-gray-800 shadow-[0_12px_30px_rgba(0,0,0,0.06)]"} backdrop-blur-2xl`}
           >
-            <div className="flex items-start justify-between gap-3 border-b border-white/10 px-4 py-4">
+            <div className="flex items-start justify-between gap-3 border-b border-white/10 px-3 py-3 sm:px-4 sm:py-4">
               <div>
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-amber-200">
+                <p className="text-[0.62rem] font-semibold uppercase tracking-[0.28em] text-amber-200 sm:text-[0.7rem] sm:tracking-[0.32em]">
                   Customer Service AI
                 </p>
-                <h3 className="mt-1 text-lg font-semibold text-white">
+                <h3 className="mt-1 text-base font-semibold text-white sm:text-lg">
                   Ask anything about your trip
                 </h3>
               </div>
@@ -113,14 +113,14 @@ export default function CustomerServiceAiWidget() {
               </button>
             </div>
 
-            <div className="max-h-80 space-y-3 overflow-y-auto px-4 py-4">
+            <div className="max-h-72 space-y-3 overflow-y-auto px-3 py-3 sm:max-h-80 sm:px-4 sm:py-4">
               {messages.map((message) => (
                 <div
                   key={message.id}
                   className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[85%] rounded-3xl px-4 py-3 text-sm leading-6 ${
+                    className={`max-w-[85%] rounded-3xl px-3 py-2.5 text-sm leading-6 sm:px-4 sm:py-3 ${
                       message.role === "user"
                         ? isDark
                           ? "bg-amber-200 text-[#1a140d]"
@@ -136,14 +136,14 @@ export default function CustomerServiceAiWidget() {
               ))}
             </div>
 
-            <div className="border-t border-white/10 px-4 py-4">
+            <div className="border-t border-white/10 px-3 py-3 sm:px-4 sm:py-4">
               <div className="mb-3 flex flex-wrap gap-2">
                 {quickTopics.map((topic) => (
                   <button
                     key={topic}
                     type="button"
                     onClick={() => replyToMessage(topic)}
-                    className={`rounded-full px-3 py-1.5 text-xs transition ${isDark ? "border border-white/10 text-white/75 hover:border-amber-200/40 hover:bg-white/8 hover:text-white" : "border border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"}`}
+                    className={`rounded-full px-2.5 py-1.5 text-[0.68rem] transition sm:px-3 sm:text-xs ${isDark ? "border border-white/10 text-white/75 hover:border-amber-200/40 hover:bg-white/8 hover:text-white" : "border border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50"}`}
                   >
                     {topic}
                   </button>
@@ -165,11 +165,11 @@ export default function CustomerServiceAiWidget() {
                       ? "Type your question..."
                       : "Ask about planning or support..."
                   }
-                  className={`h-11 flex-1 rounded-full border px-4 text-sm outline-none transition ${isDark ? "border border-white/10 bg-white/5 text-white placeholder:text-white/35 focus:border-amber-200/40" : "border border-gray-200 bg-white text-gray-800 placeholder:text-gray-400 focus:border-primary-400"}`}
+                  className={`h-10 flex-1 rounded-full border px-3 text-sm outline-none transition sm:h-11 sm:px-4 ${isDark ? "border border-white/10 bg-white/5 text-white placeholder:text-white/35 focus:border-amber-200/40" : "border border-gray-200 bg-white text-gray-800 placeholder:text-gray-400 focus:border-primary-400"}`}
                 />
                 <button
                   type="submit"
-                  className="inline-flex h-11 items-center justify-center rounded-full bg-amber-200 px-4 text-sm font-semibold text-[#1a140d] transition hover:bg-amber-100"
+                  className="inline-flex h-10 items-center justify-center rounded-full bg-amber-200 px-3 text-sm font-semibold text-[#1a140d] transition hover:bg-amber-100 sm:h-11 sm:px-4"
                 >
                   <Send size={16} />
                 </button>
@@ -182,23 +182,26 @@ export default function CustomerServiceAiWidget() {
       <button
         type="button"
         onClick={() => setOpen((previous) => !previous)}
-        className={`group inline-flex items-center gap-3 rounded-full px-4 py-3 text-left shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition ${isDark ? "border border-amber-200/20 bg-[#120d08]/95 text-white hover:border-amber-200/40 hover:bg-[#17110c]" : "border border-gray-200 bg-white text-gray-800 hover:border-gray-300 hover:bg-gray-50"}`}
+        className={`group inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-left shadow-[0_18px_45px_rgba(0,0,0,0.28)] transition sm:gap-3 sm:px-4 sm:py-3 ${isDark ? "border border-amber-200/20 bg-[#120d08]/95 text-white hover:border-amber-200/40 hover:bg-[#17110c]" : "border border-gray-200 bg-white text-gray-800 hover:border-gray-300 hover:bg-gray-50"}`}
         aria-label="Open customer service assistant"
       >
         <span
-          className={`flex h-10 w-10 items-center justify-center rounded-full transition group-hover:scale-105 ${isDark ? "bg-amber-200 text-[#1a140d]" : "bg-primary-500 text-white"}`}
+          className={`flex h-8 w-8 items-center justify-center rounded-full transition group-hover:scale-105 sm:h-10 sm:w-10 ${isDark ? "bg-amber-200 text-[#1a140d]" : "bg-primary-500 text-white"}`}
         >
-          <Bot size={18} />
+          <Bot size={16} className="sm:hidden" />
+          <Bot size={18} className="hidden sm:block" />
         </span>
         <span>
-          <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-amber-500">
+          <span className="block text-[0.6rem] font-semibold uppercase tracking-[0.24em] text-amber-500 sm:text-[0.68rem] sm:tracking-[0.28em]">
             Help
           </span>
-         
+          <span className="hidden text-xs text-gray-500 sm:block">
+            Ask a quick question
+          </span>
         </span>
         <Sparkles
           size={16}
-          className={`${isDark ? "text-amber-200/90" : "text-primary-500/90"}`}
+          className={`hidden sm:block ${isDark ? "text-amber-200/90" : "text-primary-500/90"}`}
         />
       </button>
     </div>

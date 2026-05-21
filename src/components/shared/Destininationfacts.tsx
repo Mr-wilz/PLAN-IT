@@ -48,18 +48,17 @@ export default function DestinationFacts() {
   const imageUrl = getImageUrl()?.[0];
 
   return (
-    <section className="py-10 bg-white">
-      <div className="max-w-5xl mx-auto px-6">
+    <section className="w-full bg-white py-10">
+      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          
-          <h2 className="text-5xl font-semibold text-primary-500 tracking-tight">
+          <h2 className="text-3xl font-semibold text-primary-500 tracking-tight sm:text-4xl lg:text-5xl">
             Discover Hidden Facts + Iconic Views
           </h2>
         </div>
 
         {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-12">
-          <div className="flex gap-3">
+        <div className="mx-auto mb-12 w-full max-w-2xl">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <div className="relative flex-1">
               <MapPin className="absolute left-5 top-4 text-gray-400" />
               <input
@@ -68,13 +67,13 @@ export default function DestinationFacts() {
                 onChange={(e) => setDestination(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleGetFacts()}
                 placeholder="e.g. Paris, Tokyo, New York, Machu Picchu..."
-                className="w-full pl-14 pr-6 py-4 bg-white border border-gray-200 rounded-3xl text-lg focus:outline-none focus:border-primary-500"
+                className="w-full rounded-3xl border border-gray-200 bg-white py-4 pl-14 pr-6 text-lg focus:border-primary-500 focus:outline-none"
               />
             </div>
             <button
               onClick={handleGetFacts}
               disabled={loading}
-              className="px-10 bg-primary-500 hover:bg-primary-600 disabled:bg-gray-400 text-white rounded-3xl font-medium flex items-center gap-3 transition"
+              className="inline-flex items-center justify-center gap-3 rounded-3xl bg-primary-500 px-8 py-4 font-medium text-white transition hover:bg-primary-600 disabled:bg-gray-400 sm:px-10"
             >
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

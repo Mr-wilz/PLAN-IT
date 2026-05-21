@@ -109,11 +109,11 @@ export default function MostVisitedPlaces() {
 
   return (
     <section
-      className={`py-20 px-6 transition-colors duration-300 ${
+      className={`w-full py-16 sm:py-20 transition-colors duration-300 ${
         theme === "dark" ? "bg-[#050505] text-white" : "bg-white text-slate-950"
       }`}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,29 +121,29 @@ export default function MostVisitedPlaces() {
           className="mb-10"
         >
           <h2
-            className={`mb-4 text-5xl font-semibold tracking-tight ${
+            className={`mb-4 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl ${
               theme === "dark" ? "text-white" : "text-primary-500"
             }`}
           >
             Most Visited Places
           </h2>
           <p
-            className={`max-w-3xl text-xl ${
+            className={`max-w-3xl text-base sm:text-lg lg:text-xl ${
               theme === "dark" ? "text-white/75" : "text-gray-600"
             }`}
           >
             Where would you like to visit?
           </p>
           <p
-            className={`max-w-3xl text-xl ${
+            className={`max-w-3xl text-base sm:text-lg lg:text-xl ${
               theme === "dark" ? "text-white/75" : "text-gray-600"
             }`}
           >
-           Towns, cities, States, countries even continental regions
+            Towns, cities, States, countries even continental regions
           </p>{" "}
         </motion.div>
 
-        <div className="max-w-3xl mb-12">
+        <div className="mb-12 w-full max-w-3xl">
           <div className="flex flex-col gap-3 md:flex-row">
             <div className="relative flex-1">
               <Search

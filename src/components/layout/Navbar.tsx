@@ -7,9 +7,11 @@ import {
   Heart,
   LogOut,
   MoonStar,
+  Menu,
   Settings2,
   SunMedium,
   User,
+  X,
 } from "lucide-react";
 import { useTheme } from "@/components/context/ThemeContext";
 
@@ -20,6 +22,7 @@ export default function Navbar() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [authMenuOpen, setAuthMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, logout } = useAuthStore();
   const isAuthenticated = !!user;
   const discoverRef = useRef<HTMLDivElement>(null);
@@ -28,6 +31,7 @@ export default function Navbar() {
   );
   const profileRef = useRef<HTMLDivElement>(null);
   const authMenuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === "dark";
   const lastScrollYRef = useRef(0);
@@ -65,6 +69,7 @@ export default function Navbar() {
         setDiscoverOpen(false);
         setProfileOpen(false);
         setAuthMenuOpen(false);
+        setMobileMenuOpen(false);
       } else if (currentScrollY < lastScrollYRef.current) {
         // Scrolling up: show the navbar.
         setNavVisible(true);
@@ -106,6 +111,12 @@ export default function Navbar() {
       ) {
         setAuthMenuOpen(false);
       }
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setMobileMenuOpen(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -119,6 +130,7 @@ export default function Navbar() {
         setProfileOpen(false);
         setAuthMenuOpen(false);
         setSettingsOpen(false);
+        setMobileMenuOpen(false);
       }
     };
 
@@ -126,12 +138,25 @@ export default function Navbar() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileMenuOpen]);
+
   const handleLogout = () => {
     logout();
     setProfileOpen(false);
   };
 
   const handleAuthLinkClick = () => setAuthMenuOpen(false);
+
+  const closeMobileMenu = () => setMobileMenuOpen(false);
 
   const handleSettingsClick = () => {
     setProfileOpen(false);
@@ -149,7 +174,7 @@ export default function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-4 pt-3 sm:px-6">
           <div
-            className={`flex items-center justify-between gap-4 rounded-[1.75rem] border px-4 py-3 backdrop-blur-2xl transition-all duration-380 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-5 ${
+            className={`flex items-center justify-between gap-3 rounded-[1.25rem] border px-4 py-3 backdrop-blur-2xl transition-all duration-380 ease-[cubic-bezier(0.22,1,0.36,1)] sm:gap-4 sm:rounded-[1.75rem] sm:px-5 ${
               isDark
                 ? scrolled
                   ? "border-amber-200/20 bg-[rgba(8,8,8,0.92)] shadow-[0_24px_70px_rgba(0,0,0,0.6)]"
@@ -170,7 +195,7 @@ export default function Navbar() {
               </span>
             </Link>
 
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="hidden items-center gap-2 sm:gap-3 md:flex">
               <div
                 ref={discoverRef}
                 className="relative"
@@ -324,7 +349,7 @@ export default function Navbar() {
               </Link>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="hidden items-center gap-2 sm:gap-3 md:flex">
               <button
                 type="button"
                 onClick={toggleTheme}
@@ -477,9 +502,176 @@ export default function Navbar() {
                 </div>
               )}
             </div>
+
+            <div className="flex items-center gap-2 md:hidden">
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen((open) => !open)}
+                aria-expanded={mobileMenuOpen}
+                aria-label="Open navigation menu"
+                className={`flex h-10 w-10 items-center justify-center rounded-full border transition ${
+                  isDark
+                    ? "border-amber-200/20 bg-white/6 text-white hover:bg-white/10"
+                    : "border-amber-100/80 bg-white/80 text-gray-700 hover:bg-white"
+                }`}
+              >
+                {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+              </button>
+            </div>
           </div>
         </div>
       </nav>
+
+      {mobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-60 bg-black/45 backdrop-blur-[2px] md:hidden"
+          onClick={closeMobileMenu}
+        >
+          <div
+            ref={mobileMenuRef}
+            className={`absolute right-0 top-0 h-full w-[min(86vw,20rem)] overflow-y-auto border-l px-4 py-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] ${
+              isDark
+                ? "border-amber-200/20 bg-[#080808]/98 text-white"
+                : "border-amber-100/60 bg-white/98 text-gray-800"
+            }`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-3 pb-4">
+              <div>
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-400">
+                  Menu
+                </p>
+                <h3 className="mt-1 text-lg font-semibold">Plan-It</h3>
+              </div>
+              <button
+                type="button"
+                onClick={closeMobileMenu}
+                className={`flex h-9 w-9 items-center justify-center rounded-full border ${isDark ? "border-white/10 bg-white/6 text-white" : "border-gray-200 bg-white text-gray-700"}`}
+                aria-label="Close navigation menu"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div
+                className={`rounded-2xl border p-3 ${isDark ? "border-amber-200/20 bg-white/4" : "border-gray-200 bg-gray-50"}`}
+              >
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary-400">
+                  Explore
+                </p>
+                <div className="grid gap-2">
+                  {[
+                    ["/planner", "Planner"],
+                    ["/map", "Explore Map"],
+                    ["/why-plan-it", "Why Plan-It"],
+                    ["/blog", "Travel Journal"],
+                    ["/travel-ideas", "Travel Ideas"],
+                    ["/destinations", "Destinations"],
+                    ["/partners", "For Partners"],
+                    ["/about", "About Us"],
+                    ["/careers", "Careers"],
+                  ].map(([to, label]) => (
+                    <Link
+                      key={to}
+                      to={to}
+                      onClick={closeMobileMenu}
+                      className={`rounded-xl px-3 py-3 text-sm font-medium transition ${isDark ? "bg-white/5 text-white hover:bg-white/10" : "bg-white text-gray-700 hover:bg-amber-50 hover:text-primary-500"}`}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div
+                className={`rounded-2xl border p-3 ${isDark ? "border-amber-200/20 bg-white/4" : "border-gray-200 bg-gray-50"}`}
+              >
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary-400">
+                  Account
+                </p>
+                <div className="grid gap-2">
+                  {isAuthenticated ? (
+                    <>
+                      <Link
+                        to="/dashboard"
+                        onClick={closeMobileMenu}
+                        className={`rounded-xl px-3 py-3 text-sm font-medium transition ${isDark ? "bg-white/5 text-white hover:bg-white/10" : "bg-white text-gray-700 hover:bg-amber-50 hover:text-primary-500"}`}
+                      >
+                        Dashboard
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleSettingsClick();
+                          closeMobileMenu();
+                        }}
+                        className={`rounded-xl px-3 py-3 text-left text-sm font-medium transition ${isDark ? "bg-white/5 text-white hover:bg-white/10" : "bg-white text-gray-700 hover:bg-amber-50 hover:text-primary-500"}`}
+                      >
+                        Settings
+                      </button>
+                      <Link
+                        to="/why-plan-it"
+                        onClick={closeMobileMenu}
+                        className={`rounded-xl px-3 py-3 text-sm font-medium transition ${isDark ? "bg-white/5 text-white hover:bg-white/10" : "bg-white text-gray-700 hover:bg-amber-50 hover:text-primary-500"}`}
+                      >
+                        Help
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleLogout();
+                          closeMobileMenu();
+                        }}
+                        className="rounded-xl bg-red-50 px-3 py-3 text-left text-sm font-medium text-red-600 transition hover:bg-red-100"
+                      >
+                        Log Out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        to="/login"
+                        onClick={closeMobileMenu}
+                        className={`rounded-xl px-3 py-3 text-sm font-medium transition ${isDark ? "bg-white/5 text-white hover:bg-white/10" : "bg-white text-gray-700 hover:bg-amber-50 hover:text-primary-500"}`}
+                      >
+                        Log In
+                      </Link>
+                      <Link
+                        to="/register"
+                        onClick={closeMobileMenu}
+                        className={`rounded-xl px-3 py-3 text-sm font-medium transition ${isDark ? "bg-white/5 text-white hover:bg-white/10" : "bg-white text-gray-700 hover:bg-amber-50 hover:text-primary-500"}`}
+                      >
+                        Sign Up
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <div
+                className={`rounded-2xl border p-3 ${isDark ? "border-amber-200/20 bg-white/4" : "border-gray-200 bg-gray-50"}`}
+              >
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-primary-400">
+                  Appearance
+                </p>
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className={`flex w-full items-center justify-between rounded-xl px-3 py-3 text-sm font-medium transition ${isDark ? "bg-white/5 text-white hover:bg-white/10" : "bg-white text-gray-700 hover:bg-amber-50 hover:text-primary-500"}`}
+                >
+                  <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
+                  {theme === "dark" ? (
+                    <SunMedium size={16} />
+                  ) : (
+                    <MoonStar size={16} />
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {settingsOpen && (
         <div

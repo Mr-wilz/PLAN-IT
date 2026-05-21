@@ -14,7 +14,7 @@ const MapPage = lazy(() => import("@/components/pages/MapPage"));
 
 export default function Home() {
   return (
-    <>
+    <div className="w-full overflow-x-hidden">
       <Hero />
       <PlanWithUs />
 
@@ -33,7 +33,7 @@ export default function Home() {
       <DestinationFacts />
 
       <section className="pb-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
               <h2 className="text-5xl font-semibold tracking-tight text-primary-500">
@@ -58,6 +58,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

@@ -15,7 +15,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="h-[calc(100vh-8rem)] flex items-center relative overflow-hidden">
+    <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-center overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full">
         {heroVideos.map((video, index) => (
@@ -35,26 +35,26 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 pt-24 relative z-10">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-20 sm:px-6 lg:px-8 lg:pt-24">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-3xl text-center mx-auto"
+          className="mx-auto w-full max-w-3xl text-center"
         >
-          <h1 className="text-7xl font-semibold leading-none tracking-tighter text-white font-poiret">
+          <h1 className="text-[clamp(2.7rem,10vw,4.75rem)] font-semibold leading-[0.9] tracking-tighter text-white font-poiret">
             Your perfect trip,
             <br />
             AI-crafted.
           </h1>
-          <p className="mt-6 text-2xl text-white/90 font-poiret">
+          <p className="mt-5 text-base text-white/90 font-poiret sm:mt-6 sm:text-2xl">
             Tell us where, when, and how you want to travel.
             <br />
             Let AI handle the rest.
           </p>
           <a
             href="#explore"
-            className="mt-10 inline-flex items-center gap-3 px-4 py-4 bg-primary-500 hover:bg-primary-600 hover:animate-pulse text-white rounded-lg text-xl font-medium transition-all active:scale-95 font-poiret"
+            className="mt-8 inline-flex items-center gap-3 rounded-lg bg-primary-500 px-4 py-3 text-base font-medium text-white transition-all active:scale-95 hover:bg-primary-600 hover:animate-pulse font-poiret sm:mt-10 sm:px-5 sm:py-4 sm:text-xl"
           >
             Explore
           </a>

@@ -4,17 +4,17 @@ import StarRating from "@/components/ui/StarRating";
 export default function PlanWithUs() {
   return (
     <section
-      className="py-16 backdrop-blur-3xl  bg-white border-t border-gray-200"
+      className="w-full border-t border-gray-200 bg-white py-12 sm:py-16 backdrop-blur-3xl"
       id="explore"
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-semibold text-center mb-8">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-8 text-center text-2xl font-semibold sm:text-3xl">
           Why plan with Plan-It?
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 text-center">
+        <div className="mb-10 grid grid-cols-1 gap-6 text-center sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           <div>
-            <div className="mx-auto w-14 h-14 rounded-full flex items-center justify-center bg-pink-100 mb-4">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-pink-100">
               <Phone className="text-pink-600" />
             </div>
             <h3 className="font-semibold">24/7 customer support</h3>
@@ -41,7 +41,6 @@ export default function PlanWithUs() {
             <p className="text-sm text-gray-600 mt-2">
               Plan and book with confidence using reviews from fellow travelers.
             </p>
-           
           </div>
 
           <div>
@@ -56,8 +55,8 @@ export default function PlanWithUs() {
           </div>
         </div>
 
-        <div className="max-w-3xl mx-auto bg-purple-50/90 rounded-xl p-8">
-          <h3 className="text-2xl font-semibold text-center mb-4">
+        <div className="mx-auto w-full max-w-3xl rounded-xl bg-purple-50/90 p-5 sm:p-8">
+          <h3 className="mb-4 text-center text-xl font-semibold sm:text-2xl">
             Log in to manage bookings & Plan-It Rewards
           </h3>
           <p className="text-center text-sm text-gray-600 mb-6">

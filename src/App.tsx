@@ -55,9 +55,11 @@ function AppContent() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-primary-50 flex flex-col">
+    <div className="min-h-screen w-full overflow-x-hidden bg-primary-50 flex flex-col">
       <Navbar />
-      <main className={`flex-1 ${hasTopSpacing ? "pt-12 md:pt-16" : ""}`}>
+      <main
+        className={`flex-1 w-full overflow-x-hidden ${hasTopSpacing ? "pt-12 md:pt-16" : ""}`}
+      >
         <AnimatePresence mode="wait">
           <Suspense
             fallback={
@@ -72,7 +74,7 @@ function AppContent() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-              className="min-h-full"
+              className="min-h-full w-full"
             >
               <Routes>
                 <Route path="/" element={<Home />} />
