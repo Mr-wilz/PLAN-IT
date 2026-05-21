@@ -24,8 +24,6 @@ import {
 } from "lucide-react";
 import { useAuthStore } from "@/components/features/auth/store/authStore";
 import { supabase } from "@/components/services/supabase";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import { useTheme } from "@/components/context/ThemeContext";
 import BreadcrumbHeader from "@/components/shared/BreadcrumbHeader";
 
@@ -323,6 +321,12 @@ export default function MapPage() {
   const exportPDF = async () => {
     const el = document.getElementById("map-canvas");
     if (!el) return;
+
+    const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
+      import("html2canvas"),
+      import("jspdf"),
+    ]);
+
     const canvas = await html2canvas(el, { scale: 2 });
     const imgData = canvas.toDataURL("image/jpeg", 0.9);
     const pdf = new jsPDF({ orientation: "landscape" });
