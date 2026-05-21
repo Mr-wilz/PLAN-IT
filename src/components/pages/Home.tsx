@@ -17,6 +17,9 @@ export default function Home() {
     <>
       <Hero />
       <PlanWithUs />
+
+      <ToKnow />
+      <MostVisitedPlaces />
       <Suspense
         fallback={
           <div className="flex min-h-[60vh] items-center justify-center bg-white">
@@ -26,8 +29,6 @@ export default function Home() {
       >
         <MapPage />
       </Suspense>
-      <ToKnow />
-      <MostVisitedPlaces />
 
       <DestinationFacts />
 
