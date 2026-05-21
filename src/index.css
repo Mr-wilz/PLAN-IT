@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poiret+One&display=swap");
 @import "tailwindcss";
 
@@ -35,6 +36,7 @@
     --button-bg: #b9914c;
     --button-bg-hover: #a07e47;
     --button-text: #ffffff;
+    --font-raleway: "Raleway", sans-serif;
     --font-poiret: "Poiret One", cursive;
   }
 
@@ -407,6 +409,10 @@
 
 .font-poiret {
   font-family: var(--font-poiret) !important;
+}
+
+.font-raleway {
+  font-family: var(--font-raleway) !important;
 }
 
 /* Hide native scrollbars while preserving scrolling functionality */

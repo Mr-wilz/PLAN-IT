@@ -56,7 +56,11 @@ function MapFocusController({ focus }: { focus: MapFocus | null }) {
   return null;
 }
 
-export default function MapPage() {
+type MapPageProps = {
+  showBreadcrumb?: boolean;
+};
+
+export default function MapPage({ showBreadcrumb = true }: MapPageProps) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
@@ -417,12 +421,14 @@ export default function MapPage() {
       }`}
     >
       <div className="mx-auto max-w-6xl">
-        <BreadcrumbHeader
-          title="Destinations Map"
-          subtitle="Type any place, city, or address and jump straight to it at street-level zoom."
-          items={[{ label: "Home", to: "/" }, { label: "Map" }]}
-          dark={isDark}
-        />
+        {showBreadcrumb && (
+          <BreadcrumbHeader
+            title="Destinations Map"
+            subtitle="Type any place, city, or address and jump straight to it at street-level zoom."
+            items={[{ label: "Home", to: "/" }, { label: "Map" }]}
+            dark={isDark}
+          />
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: -20 }}

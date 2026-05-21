@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const heroVideos = ["/colvid.mp4", "/4khd.mp4", "/chinVid.mp4"];
+const heroVideos = ["/4khd.mp4", "/chinVid.mp4"];
 
 export default function Hero() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -42,7 +42,7 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="mx-auto w-full max-w-3xl text-center"
         >
-          <h1 className="text-[clamp(2.7rem,10vw,4.75rem)] font-semibold leading-[0.9] tracking-tighter text-white font-poiret">
+          <h1 className="font-raleway text-[clamp(2.7rem,10vw,4.75rem)] font-semibold leading-[0.9] tracking-tighter text-white">
             Your perfect trip,
             <br />
             AI-crafted.

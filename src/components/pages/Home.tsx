@@ -27,7 +27,7 @@ export default function Home() {
           </div>
         }
       >
-        <MapPage />
+        <MapPage showBreadcrumb={false} />
       </Suspense>
 
       <DestinationFacts />
