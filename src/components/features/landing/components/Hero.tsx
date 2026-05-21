@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const heroVideos = ["/tourist.jpg", "/4khd.mp4", "/chinVid.mp4"];
+const heroBackground = "/tourist.jpg";
+const heroVideos = ["/4khd.mp4", "/chinVid.mp4"];
 
 export default function Hero() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -16,6 +17,16 @@ export default function Hero() {
 
   return (
     <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-center overflow-hidden">
+      {/* Static background fallback */}
+      <div className="absolute inset-0 w-full h-full">
+        <img
+          src={heroBackground}
+          alt="Travel backdrop"
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/35" />
+      </div>
+
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full">
         {heroVideos.map((video, index) => (
@@ -25,7 +36,10 @@ export default function Hero() {
             autoPlay
             muted
             loop={true}
-            className="absolute inset-0 w-full h-full object-fill"
+            playsInline
+            preload="auto"
+            poster={heroBackground}
+            className="absolute inset-0 h-full w-full object-cover"
             animate={{ opacity: index === currentVideoIndex ? 1 : 0 }}
             transition={{ duration: 1 }}
           />
