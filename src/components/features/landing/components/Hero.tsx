@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const heroVideos = ["/4khd.mp4", "/chinVid.mp4"];
+const heroVideos = ["/tourist.jpg", "/4khd.mp4", "/chinVid.mp4"];
 
 export default function Hero() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
