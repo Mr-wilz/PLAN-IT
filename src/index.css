@@ -35,6 +35,7 @@
     --button-bg: #b9914c;
     --button-bg-hover: #a07e47;
     --button-text: #ffffff;
+    --font-poiret: "Poiret One", cursive;
   }
 
   [data-theme="dark"] {
@@ -70,8 +71,6 @@
   a {
     color: inherit;
   }
-
-  --font-poiret: "Poiret One", cursive;
 }
 /* ==================== DARK THEME - PREMIUM LOOK ==================== */
 [data-theme="dark"] {
@@ -98,16 +97,6 @@
 [data-theme="dark"] .bg-gray-50,
 [data-theme="dark"] .bg-gray-100 {
   background-color: var(--bg-glass) !important;
-
-  /* Dashboard surfaces get a stronger premium glass treatment in dark mode */
-  [data-theme="dark"] .dashboard-page {
-    background: linear-gradient(
-      160deg,
-      #050505 0%,
-      #101010 44%,
-      #1a140e 100%
-    ) !important;
-  }
 
   [data-theme="dark"] .dashboard-trips-shell,
   [data-theme="dark"] .dashboard-trip-card,
@@ -147,6 +136,53 @@
   }
   backdrop-filter: blur(16px);
   border: 1px solid var(--surface-border);
+}
+
+/* Dashboard surfaces get a stronger premium glass treatment in dark mode */
+[data-theme="dark"] .dashboard-page {
+  background: linear-gradient(
+    160deg,
+    #050505 0%,
+    #101010 44%,
+    #1a140e 100%
+  ) !important;
+}
+
+[data-theme="dark"] .dashboard-trips-shell,
+[data-theme="dark"] .dashboard-trip-card,
+[data-theme="dark"] .dashboard-modal,
+[data-theme="dark"] .dashboard-trip-meta {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.015)
+  ) !important;
+  backdrop-filter: blur(26px) saturate(145%) !important;
+  -webkit-backdrop-filter: blur(26px) saturate(145%) !important;
+  border-color: rgba(185, 145, 76, 0.2) !important;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.62),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
+}
+
+[data-theme="dark"] .dashboard-trip-card h3,
+[data-theme="dark"] .dashboard-modal h3 {
+  color: var(--app-title) !important;
+}
+
+[data-theme="dark"] .dashboard-trip-card p,
+[data-theme="dark"] .dashboard-trip-card span,
+[data-theme="dark"] .dashboard-modal p,
+[data-theme="dark"] .dashboard-modal span {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .dashboard-trip-meta {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+[data-theme="dark"] .dashboard-modal {
+  color: #f8fafc !important;
 }
 
 /* Text Colors */
