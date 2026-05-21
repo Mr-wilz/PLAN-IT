@@ -18,6 +18,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   :root {
@@ -65,9 +67,17 @@
     background: var(--app-bg);
     background-attachment: fixed;
     color: var(--app-text);
+    overflow-x: hidden;
+    overflow-y: visible;
     transition:
       background 0.35s ease,
       color 0.35s ease;
+  }
+
+  #root {
+    min-height: 100%;
+    width: 100%;
+    overflow: visible;
   }
 
   a {
