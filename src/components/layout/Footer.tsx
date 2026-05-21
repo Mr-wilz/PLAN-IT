@@ -123,6 +123,10 @@ export default function Footer() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
   const updateScrollState = () => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -418,9 +422,19 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-amber-100/15 pt-8 mt-10">
-          <p className="text-center text-sm text-white/65">
-            © {currentYear} Plan-It. All rights reserved.
-          </p>
+          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
+            <p className="text-sm text-white/65">
+              © {currentYear} Plan-It. All rights reserved.
+            </p>
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="inline-flex items-center gap-2 rounded-full border border-amber-200/20 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:border-amber-200/40 hover:bg-white/10 hover:text-amber-100"
+            >
+              Back to top
+              <ArrowUpRight size={16} />
+            </button>
+          </div>
         </div>
       </div>
     </motion.footer>
